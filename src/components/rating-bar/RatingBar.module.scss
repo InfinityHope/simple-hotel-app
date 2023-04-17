@@ -1,0 +1,7 @@
+.RatingBar {
+	svg {
+		&:not(:last-child) {
+			margin-right: 3px;
+		}
+	}
+}

@@ -1,0 +1,20 @@
+.HomePage {
+	background: #f4f4f4;
+	height: 100vh;
+	.SideBlock {
+		width: 100%;
+		min-height: 815px;
+		max-height: 815px;
+	}
+	.MainBlock {
+		background: #ffffff;
+		box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+		border-radius: 16px;
+		width: 100%;
+		min-height: 815px;
+		max-height: 815px;
+		padding: 48px 32px;
+		flex-direction: column;
+		justify-content: center;
+	}
+}

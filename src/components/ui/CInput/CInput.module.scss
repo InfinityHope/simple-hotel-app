@@ -1,0 +1,9 @@
+.CInput {
+	background: #ffffff;
+	border: 1px solid #c9cacc;
+	border-radius: 4px;
+	padding: 15px;
+	&::placeholder {
+		color: #424242;
+	}
+}

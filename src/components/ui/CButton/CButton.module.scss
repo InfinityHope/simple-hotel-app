@@ -1,0 +1,28 @@
+.CButton {
+	position: relative;
+	background-image: linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%) !important;
+	color: #fff;
+	border-radius: 4px !important;
+	z-index: 1;
+	&::before {
+		position: absolute;
+		content: '';
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+			linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%);
+		z-index: -1;
+		transition: opacity 0.3s linear;
+		opacity: 0;
+		border-radius: 4px;
+	}
+	&:hover::before {
+		opacity: 1;
+	}
+	&:active::before {
+		background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+			linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%);
+	}
+}

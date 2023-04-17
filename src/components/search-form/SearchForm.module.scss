@@ -1,0 +1,18 @@
+.SearchForm {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 24px;
+	background: #ffffff;
+	box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+	border-radius: 16px;
+	max-height: 340px;
+	min-height: 340px;
+	button {
+		margin-top: 24px;
+	}
+	label {
+		margin-top: 12px;
+	}
+}
