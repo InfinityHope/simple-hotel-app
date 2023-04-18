@@ -1,15 +1,29 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
 import ChevronRightIcon from '@/ui/ChevronRightIcon/ChevronRightIcon'
 import { convertLongDate } from '@/utils/date.utils'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex, Text } from '@chakra-ui/react'
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	Flex,
+	Text,
+	useMediaQuery
+} from '@chakra-ui/react'
 
 const Breadcrumbs = () => {
 	const { checkIn, location } = useAppSelector(state => state.searchParamsReducer)
+	const [isLargerThan550] = useMediaQuery('(min-width: 550px)')
 
 	return (
-		<Flex width={'100%'} height={'40px'} justifyContent={'space-between'} alignItems={'center'}>
+		<Flex
+			width={'100%'}
+			height={'40px'}
+			justifyContent={'space-between'}
+			alignItems={'center'}
+			flexWrap={'wrap'}
+		>
 			<Breadcrumb
-				fontSize={'32px'}
+				fontSize={isLargerThan550 ? '32px' : '24px'}
 				fontWeight={'medium'}
 				spacing='14px'
 				alignItems={'center'}
@@ -23,7 +37,7 @@ const Breadcrumbs = () => {
 					<BreadcrumbLink href='#'>{location}</BreadcrumbLink>
 				</BreadcrumbItem>
 			</Breadcrumb>
-			<Text fontSize={'24px'}>{convertLongDate(checkIn)}</Text>
+			<Text fontSize={isLargerThan550 ? '24px' : '16px'}>{convertLongDate(checkIn)}</Text>
 		</Flex>
 	)
 }

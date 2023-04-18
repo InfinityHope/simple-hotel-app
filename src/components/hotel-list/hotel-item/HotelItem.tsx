@@ -8,12 +8,14 @@ import { IHotel } from '@/interfaces/Hotel.interface'
 import { addToFavorite, removeFromFavorite } from '@/store/actions/favorite.actions'
 import { createLabel } from '@/utils/createLabel'
 import { convertLongDate } from '@/utils/date.utils'
-import { Box, Flex, Img, Text } from '@chakra-ui/react'
+import { truncateString } from '@/utils/truncateString'
+import { Box, Flex, Img, Text, useMediaQuery } from '@chakra-ui/react'
 import { FC } from 'react'
 import styles from './HotelItem.module.scss'
 
 const HotelItem: FC<IHotel> = hotel => {
 	const { checkIn, nights } = useAppSelector(state => state.searchParamsReducer)
+	const [isLargerThan550] = useMediaQuery('(min-width: 550px)')
 	const isFavorite = useIsFavorite(hotel.hotelId)
 	const dispatch = useAppDispatch()
 
@@ -38,26 +40,41 @@ const HotelItem: FC<IHotel> = hotel => {
 
 	return (
 		<Flex as='li' className={styles.HotelItem}>
-			<Box className={styles.HotelItemLeft}>
-				<Img src={houseImg} />
-			</Box>
+			{isLargerThan550 && (
+				<Box className={styles.HotelItemLeft}>
+					<Img src={houseImg} />
+				</Box>
+			)}
+
 			<Flex className={styles.HotelItemRight}>
 				<Flex className={styles.HotelItemRightHeader}>
-					<Text>{hotel.hotelName}</Text>
+					{isLargerThan550 ? (
+						<Text>{hotel.hotelName}</Text>
+					) : (
+						<Text>{truncateString(hotel.hotelName, 17)}</Text>
+					)}
 					{!isFavorite ? (
 						<FavoriteIconInActive onClick={addToFav} />
 					) : (
 						<FavoriteIconActive onClick={removeFromFav} />
 					)}
 				</Flex>
-				<Flex className={styles.HotelItemRightBody}>
+				<Flex
+					width={isLargerThan550 ? '25%' : '75%'}
+					className={styles.HotelItemRightBody}
+					flexDirection={isLargerThan550 ? 'row' : 'column'}
+				>
 					<Text>{convertLongDate(checkIn)}</Text>
-					<Text>-</Text>
+					{isLargerThan550 && <Text>-</Text>}
 					<Text>
 						{nights} {createLabel(nights, ['день', 'дня', 'дней'])}
 					</Text>
 				</Flex>
-				<Flex className={styles.HotelItemRightFooter}>
+				<Flex
+					className={styles.HotelItemRightFooter}
+					flexDirection={isLargerThan550 ? 'row' : 'column'}
+					alignItems={isLargerThan550 ? 'center' : 'flex-start'}
+				>
 					<RatingBar stars={hotel.stars} />
 					<Flex className={styles.HotelItemRightFooterInner}>
 						<Text>Price:</Text>

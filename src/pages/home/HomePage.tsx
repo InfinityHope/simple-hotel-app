@@ -10,7 +10,7 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import { useNotification } from '@/hooks/useNotification'
 import { getHotelsRequest } from '@/store/actions/hotel.actions'
 import { createLabel } from '@/utils/createLabel'
-import { Box, Container, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
+import { Box, Container, Flex, Grid, GridItem, Text, useMediaQuery } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import styles from './HomePage.module.scss'
 
@@ -21,6 +21,8 @@ const HomePage = () => {
 	const countFavHotels = useAppSelector(state => state.favoritesReducer.favHotels.length)
 	const searchParams = useAppSelector(state => state.searchParamsReducer)
 	const { loading, error } = useAppSelector(state => state.hotelsReducer)
+
+	const [isLargerThan1290] = useMediaQuery('(min-width: 1290px)')
 
 	useEffect(() => {
 		dispatch(getHotelsRequest(searchParams))
@@ -34,13 +36,15 @@ const HomePage = () => {
 		<Box className={styles.HomePage}>
 			<Navbar />
 			<Container maxW='1440px'>
-				<Grid templateColumns={'360px 1080px'} gap='24px'>
-					<GridItem>
-						<Grid gap={'24px'} className={styles.SideBlock}>
-							<SearchForm />
-							<Favorites />
-						</Grid>
-					</GridItem>
+				<Grid templateColumns={isLargerThan1290 ? '25% 75%' : '100%'} gap='24px'>
+					{isLargerThan1290 && (
+						<GridItem>
+							<Grid gap={'24px'} className={styles.SideBlock}>
+								<SearchForm />
+								<Favorites />
+							</Grid>
+						</GridItem>
+					)}
 					<GridItem>
 						<Flex className={styles.MainBlock}>
 							{error && (

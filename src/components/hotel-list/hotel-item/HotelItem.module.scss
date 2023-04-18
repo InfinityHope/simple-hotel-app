@@ -32,7 +32,6 @@
 		}
 		&Body {
 			display: flex;
-			width: 25%;
 			justify-content: space-between;
 			margin-top: 6px;
 			color: #878787;
@@ -40,7 +39,7 @@
 		&Footer {
 			justify-content: space-between;
 			margin-top: 6px;
-			align-items: center;
+
 			&Inner {
 				p {
 					&:first-child {
